@@ -3,11 +3,10 @@ import scipy
 class Neural_Network:
 
     def __init__(self, n_inputs, n_hidden, n_outputs, lr=0.10):
-        np.random.seed(0)
         self.w_ih = np.random.randn(n_hidden, n_inputs) * 0.01
         self.w_ho = np.random.randn(n_outputs, n_hidden) * 0.01
-        self.b_ih = np.zeros((n_hidden, 1))
-        self.b_ho = np.zeros((n_outputs, 1))
+        self.b_ih = np.random.randn(n_hidden, 1) * 0.1
+        self.b_ho = np.random.randn(n_outputs, 1) * 0.1
         self.lr = lr #learning rate
         self.activation_function = lambda x : scipy.special.expit(x)
 
@@ -34,6 +33,7 @@ class Neural_Network:
         targets = np.array([[elem] for elem in targets], ndmin=2)
         
         #error in the output layer
+        #dA2 = a_2 - targets
         dA2 = a_2 - targets
         dZ2 =  dA2 * (a_2 * (1 - a_2))
 
